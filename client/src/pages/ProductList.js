@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
+import ProductDetail from "../components/ProductDetail";
 import ProductCard from "../components/ProductCard";
+import { products } from "../components/data"; 
 
 const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  justify-items: center; /* Centers the items horizontally */
+  align-items: center; 
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const PaginationContainer = styled.div`
@@ -31,22 +44,10 @@ const PaginationButton = styled.button`
 `;
 
 const ProductList = () => {
-  const products = [
-    // Add 15 products with unique image URLs, titles, and prices
-    // for illustration; here are the first few
-    { imageUrl: "https://i.postimg.cc/j5fyCTMz/image1.jpg", title: "Classic Gold Ring", price: "1200" },
-    { imageUrl: "https://i.postimg.cc/wBmSxyYF/image2.jpg", title: "Elegant Necklace", price: "2500" },
-    { imageUrl: "https://i.postimg.cc/4xt5mznK/image3.jpg", title: "Diamond Earrings", price: "3000" },
-    { imageUrl: "https://i.postimg.cc/0jw6c0TD/freepik-candid-image-photography-natural-textures-highly-r-37233.jpg", title: "Antique Doiya", price: "1200"},
-    { imageUrl: "https://i.postimg.cc/7Pnf99Q1/freepik-candid-image-photography-natural-textures-highly-r-37232.jpg", title: "Antique Lucky", price: "1200" },
-    { imageUrl: "https://i.postimg.cc/yxt5cc9D/freepik-3d-model-octane-render-volumetric-highly-detailed-37251.jpg", title: "Antique Mala", price: "1200" },
-    { imageUrl: "https://i.postimg.cc/FshGCPFh/freepik-candid-image-photography-natural-textures-highly-r-37246.jpg", title: "Antique Set", price: "1200" },
-    { imageUrl: "https://i.postimg.cc/W3bbHLyM/freepik-candid-image-photography-natural-textures-highly-r-37245.jpg", title: "Bangles", price: "1200" },
-    { imageUrl: "https://i.postimg.cc/nrh2rzPC/freepik-candid-image-photography-natural-textures-highly-r-37244.jpg", title: "Women's Rings", price: "1200" },
-    { imageUrl: "https://i.postimg.cc/mZ0xJWz7/freepik-candid-image-photography-natural-textures-highly-r-37241.jpg", title: "Men's Bracelets", price: "1200"  },
-    { imageUrl: "https://i.postimg.cc/B63WbT3N/freepik-candid-image-photography-natural-textures-highly-r-37240.jpg", title: "Men's Lucky", price: "1200" },
-    { imageUrl: "https://i.postimg.cc/59C3n6hq/freepik-candid-image-photography-natural-textures-highly-r-37239.jpg", title: "Men's Rings", price: "1200" },  ];
+  const navigate = useNavigate();
 
+
+  
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -55,6 +56,11 @@ const ProductList = () => {
   const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
+
+
+  const handleProductClick = (productId) => {
+    navigate(`/product-detail/${productId}`);
+  };
 
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -67,16 +73,16 @@ const ProductList = () => {
   return (
     <>
       <ProductGrid>
-        {currentProducts.map((product, index) => (
+        {currentProducts.map((product) => (
           <ProductCard
-            key={index}
-            imageUrl={product.imageUrl}
+            key={product.id}
+            imageUrl={product.images[0]}
             title={product.title}
             price={product.price}
+            onClick={() => handleProductClick(product.id)}
           />
         ))}
       </ProductGrid>
-
       <PaginationContainer>
         <PaginationButton onClick={handlePrevious} disabled={currentPage === 1}>
           Previous

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { AiOutlineHeart } from "react-icons/ai"; // Favorite icon
+import { HiOutlineShoppingCart } from "react-icons/hi"; // Cart icon
 
 const CardContainer = styled.div`
   position: relative;
@@ -51,13 +53,66 @@ const PriceTag = styled.div`
   font-weight: bold;
 `;
 
-const ProductCard = ({ imageUrl, title, price }) => {
+const ActionsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+`;
+
+const AddToCartButton = styled.button`
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.primary};
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.secondary};
+  }
+
+  svg {
+    margin-left: 0.5rem;
+  }
+`;
+
+const FavoriteIcon = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme.colors.primary};
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.secondary};
+  }
+`;
+
+const ProductCard = ({ imageUrl, title, price, onClick, onAddToCart, onFavorite }) => {
   return (
-    <CardContainer>
+    <CardContainer onClick={onClick}>
+      <FavoriteIcon onClick={onFavorite}>
+        <AiOutlineHeart />
+      </FavoriteIcon>
       <ProductImage src={imageUrl} alt={title} />
       <ProductDetails>
         <h3>{title}</h3>
-        <PriceTag>{price}</PriceTag>
+        <PriceTag>₹{price}</PriceTag>
+        <ActionsContainer>
+          <AddToCartButton onClick={(e) => { e.stopPropagation(); onAddToCart(); }}>
+            Add to Cart
+            <HiOutlineShoppingCart />
+          </AddToCartButton>
+        </ActionsContainer>
       </ProductDetails>
     </CardContainer>
   );

@@ -8,6 +8,13 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login"; // Import the Login page
 import Dashboard from "./components/Dashboard";
 import SignUp from "./pages/SignUp";
+import ProductList from "./pages/ProductList";
+import ProductDetail from "./components/ProductDetail";
+import Footer from "./components/Footer";
+import Wishlist from "./pages/Wishlist";
+import Cart from "./pages/Cart";
+import Orders from "./pages/Orders";
+import Stores from "./pages/Stores";
 
 function App() {
   return (
@@ -19,7 +26,15 @@ function App() {
           <Route path="/" element={<Dashboard />} /> {/* Main page */}
           <Route path="/login" element={<Login />} /> {/* Login page */}
           <Route path="/signup" element={<SignUp />} /> {/* Login page */}
+          <Route path="/wishlist" Component={Wishlist} />
+          <Route path="/cart" Component={Cart} />
+          <Route path="/orders" Component={Orders} />
+          <Route path="/stores" Component={Stores} />
+          <Route exact path="/products" Component={ProductList} />
+          <Route path="/product-detail/:productId" Component={ProductDetail} />
+          <Route path="*" element={<h2 style={{ textAlign: "center", margin:"2rem"}}>404 - Page Not Found</h2>} />
         </Routes>
+        <Footer/>
       </Router>
     </ThemeProvider>
   );

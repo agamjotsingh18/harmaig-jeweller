@@ -15,7 +15,6 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 import Stores from "./pages/Stores";
-// import Auth from "./pages/Auth";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 function App() {
@@ -27,8 +26,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} /> {/* Main page */}
           <Route path="/login" element={<Login />} /> {/* Login page */}
-          {/* <Route path="/auth" element={<Auth />} /> Login page */}
-
           <Route path="/signup" element={<SignUp />} /> {/* Login page */}
           <Route path="/wishlist" Component={Wishlist} />
           <Route path="/cart" Component={Cart} />

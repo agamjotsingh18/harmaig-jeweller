@@ -15,7 +15,8 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 import Stores from "./pages/Stores";
-
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -30,6 +31,9 @@ function App() {
           <Route path="/cart" Component={Cart} />
           <Route path="/orders" Component={Orders} />
           <Route path="/stores" Component={Stores} />
+          <Route path="/forgot-password" Component={ForgotPassword} />
+          <Route path="/reset-password/:token" Component={ResetPassword} />
+
           <Route exact path="/products" Component={ProductList} />
           <Route path="/product-detail/:productId" Component={ProductDetail} />
           <Route path="*" element={<h2 style={{ textAlign: "center", margin:"2rem"}}>404 - Page Not Found</h2>} />

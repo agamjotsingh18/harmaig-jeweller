@@ -249,7 +249,7 @@ const Navbar = () => {
 
         {/* Right Icons Section (only visible on desktop) */}
         <RightIcons>
-          <a href="#" aria-label="Contact Us">Call Us</a>
+          <a href="/" aria-label="Contact Us">Call Us</a>
           <FiHeart aria-label="Wishlist" onClick={() => navigate('/wishlist')}/>
           <FiShoppingCart aria-label="Cart" onClick={() => navigate('/cart')}/>
           <IoBagCheckOutline aria-label="Orders" onClick={() => navigate('/orders')}/>

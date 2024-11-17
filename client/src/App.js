@@ -15,7 +15,9 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 import Stores from "./pages/Stores";
-
+// import Auth from "./pages/Auth";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -25,11 +27,16 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} /> {/* Main page */}
           <Route path="/login" element={<Login />} /> {/* Login page */}
+          {/* <Route path="/auth" element={<Auth />} /> Login page */}
+
           <Route path="/signup" element={<SignUp />} /> {/* Login page */}
           <Route path="/wishlist" Component={Wishlist} />
           <Route path="/cart" Component={Cart} />
           <Route path="/orders" Component={Orders} />
           <Route path="/stores" Component={Stores} />
+          <Route path="/forgot-password" Component={ForgotPassword} />
+          <Route path="/reset-password/:token" Component={ResetPassword} />
+
           <Route exact path="/products" Component={ProductList} />
           <Route path="/product-detail/:productId" Component={ProductDetail} />
           <Route path="*" element={<h2 style={{ textAlign: "center", margin:"2rem"}}>404 - Page Not Found</h2>} />

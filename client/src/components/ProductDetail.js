@@ -21,7 +21,7 @@ const ImageGallery = styled.div`
   gap: 1rem;
   margin-bottom: 1rem;
 
-   @media (max-width: 480px) {
+  @media (max-width: 480px) {
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.5rem;
@@ -36,7 +36,7 @@ const ProductImage = styled.img`
   border: 1px solid #ddd;
   border-radius: 8px;
 
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
     width: 80px;
     height: 80px;
   }
@@ -54,7 +54,7 @@ const MainImage = styled.img`
   border-radius: 8px;
   margin-bottom: 1rem;
 
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
     width: 300px;
     height: 300px;
   }
@@ -95,13 +95,14 @@ const KaratOptions = styled.div`
 
 const KaratButton = styled.button`
   padding: 0.5rem 1rem;
-  border: 1px solid #333;
+  border: 1px solid ${({ selected }) => (selected ? "#000" : "#333")};
   border-radius: 4px;
   cursor: pointer;
-  background-color: #f9f9f9;
+  background-color: ${({ selected }) => (selected ? "#000" : "#f9f9f9")};
+  color: ${({ selected }) => (selected ? "#fff" : "#333")};
 
   &:hover {
-    background-color: #eaeaea;
+    background-color: ${({ selected }) => (selected ? "#222" : "#eaeaea")};
   }
 `;
 
@@ -109,7 +110,7 @@ const ButtonContainer = styled.div`
   display: flex;
   gap: 1rem;
 
-    @media (max-width: 480px) {
+  @media (max-width: 480px) {
     flex-direction: column;
     width: 100%;
     align-items: center;
@@ -146,12 +147,16 @@ const DoorwayDealButton = styled(ActionButton)`
 const ProductDetail = () => {
   const { productId } = useParams();
   const product = products.find((p) => p.id === Number(productId)); // Find the product by ID
-
   const [selectedImage, setSelectedImage] = useState(product?.images[0] || "");
+  const [selectedKarat, setSelectedKarat] = useState(product?.selectedKarat || "24K");
 
   if (!product) {
     return <h2>Product not found</h2>;
   }
+
+  const selectedWeight = product.weights.find((w) => w.karat === selectedKarat)?.value;
+  const selectedPrice = product.prices.find((p) => p.karat === selectedKarat)?.value;
+
 
   return (
     <Container>
@@ -168,11 +173,22 @@ const ProductDetail = () => {
           ))}
         </ImageGallery>
       )}
-      <ProductInfo>
+   <ProductInfo>
         <Title>{product.title}</Title>
         <Details>SKU: {product.sku}</Details>
-        <Price>{product.price}</Price>
-        <Details>Weight: {product.weight}</Details>
+        <Price>Price: {selectedPrice ? `₹${selectedPrice}` : "N/A"}</Price>
+        <Details>Weight: {selectedWeight ? `${selectedWeight} g` : "N/A"}</Details>
+        <KaratOptions>
+          {product.weights.map((weight) => (
+            <KaratButton
+              key={weight.karat}
+              selected={weight.karat === selectedKarat}
+              onClick={() => setSelectedKarat(weight.karat)}
+            >
+              {weight.karat}
+            </KaratButton>
+          ))}
+        </KaratOptions>
       </ProductInfo>
       <ButtonContainer>
         <ActionButton>Add to Cart</ActionButton>

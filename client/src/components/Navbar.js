@@ -5,6 +5,8 @@ import { HiOutlineBuildingStorefront } from "react-icons/hi2";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Drawer from "./Drawer";
+import { BiSolidChevronDownCircle } from "react-icons/bi";
+
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -36,8 +38,12 @@ const MenuIcon = styled.div`
     color: ${({ theme }) => theme.colors.highlight};
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     font-size: 1.2rem;
+
+    span {
+      display: none; /* Hide text on small screens */
+    }
   }
 `;
 
@@ -88,10 +94,6 @@ const RightIcons = styled.div`
 `;
 
 const MobileMenu = styled.div`
-  display: none;
-
-  @media (max-width: 768px) {
-    display: block;
     position: absolute;
     top: 60px;
     right: 10px;
@@ -103,7 +105,9 @@ const MobileMenu = styled.div`
     flex-direction: column-reverse;
     align-items: center;
     gap: 1rem; /* Adds space between the icons */
-  }
+    
+  z-index: 9999; /* Ensure it's above other components */
+
 `;
 
 const MobileMenuIcon = styled.div`
@@ -182,6 +186,10 @@ const Navbar = () => {
     setDrawerOpen(!isDrawerOpen);
   };
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((prev) => !prev);
+  console.log("Dropdown toggled, is now:", !isMobileMenuOpen);
+};
   const openSearchModal = () => {
     setSearchModalOpen(true);
   };
@@ -249,7 +257,7 @@ const Navbar = () => {
 
         {/* Right Icons Section (only visible on desktop) */}
         <RightIcons>
-          <a href="#" aria-label="Contact Us">Call Us</a>
+          <a href="/contact-us" aria-label="Contact Us">Call Us</a>
           <FiHeart aria-label="Wishlist" onClick={() => navigate('/wishlist')}/>
           <FiShoppingCart aria-label="Cart" onClick={() => navigate('/cart')}/>
           <IoBagCheckOutline aria-label="Orders" onClick={() => navigate('/orders')}/>
@@ -257,22 +265,25 @@ const Navbar = () => {
           <FiUser aria-label="User Profile" onClick={() => navigate('/login')} />
         </RightIcons>
 
-        {/* Mobile Menu (only visible on mobile screens) */}
-        <MobileMenu style={{ display: isMobileMenuOpen ? "flex" : "none" }}>
-        <FiHeart aria-label="Wishlist" onClick={() => navigate('/wishlist')}/>
-          <FiShoppingCart aria-label="Cart" onClick={() => navigate('/cart')}/>
-          <IoBagCheckOutline aria-label="Orders" onClick={() => navigate('/orders')}/>
-          <HiOutlineBuildingStorefront aria-label="Stores" onClick={() => navigate('/stores')}/>
-          <FiUser aria-label="User Profile" onClick={() => navigate('/login')} />
-        </MobileMenu>
-
         {/* Hamburger Menu Icon (only visible on mobile screens) */}
         <MobileMenuIcon
-          onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+          onClick={toggleMobileMenu} 
           aria-label="Toggle Mobile Menu"
         >
-          <FiMenu />
-        </MobileMenuIcon>
+          <BiSolidChevronDownCircle />
+      </MobileMenuIcon>
+
+        {/* Mobile Menu (only visible on mobile screens) */}
+        {isMobileMenuOpen && (
+          <MobileMenu>
+            <FiHeart onClick={() => navigate("/wishlist")} />
+            <FiShoppingCart onClick={() => navigate("/cart")} />
+            <IoBagCheckOutline onClick={() => navigate("/orders")} />
+            <HiOutlineBuildingStorefront onClick={() => navigate("/stores")} />
+            <FiUser onClick={() => navigate("/login")} />
+          </MobileMenu>
+        )}
+
       </NavbarContainer>
 
       <Drawer isOpen={isDrawerOpen} toggleDrawer={toggleDrawer} ref={drawerRef} />

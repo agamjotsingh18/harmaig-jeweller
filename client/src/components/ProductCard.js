@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { AiOutlineHeart } from "react-icons/ai"; // Favorite icon
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"; 
+import { useWishlist } from "../context/WishlistContext";
 import { HiOutlineShoppingCart } from "react-icons/hi"; // Cart icon
 
 const CardContainer = styled.div`
@@ -83,38 +84,48 @@ const AddToCartButton = styled.button`
   }
 `;
 
+
 const FavoriteIcon = styled.div`
   position: absolute;
   top: 10px;
   right: 10px;
   font-size: 1.5rem;
-  color: ${({ theme }) => theme.colors.primary};
   cursor: pointer;
   transition: color 0.3s ease;
+  color: ${({ theme, isFavorited }) => (isFavorited ? theme.colors.secondary : theme.colors.primary)};
 
   &:hover {
     color: ${({ theme }) => theme.colors.secondary};
   }
 `;
 
-const ProductCard = ({ imageUrl, title, price, onClick, onAddToCart, onFavorite }) => {
+const ProductCard = ({ product, onClick }) => {
+  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
+  const isFavorited = wishlist.some((item) => item.id === product.id);
+
+  const price22K = product.prices.find((price) => price.karat === "22K")?.value;
+
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation();
+    isFavorited ? removeFromWishlist(product.id) : addToWishlist(product);
+  };
+
   return (
     <CardContainer onClick={onClick}>
-      <FavoriteIcon onClick={onFavorite}>
-        <AiOutlineHeart />
-      </FavoriteIcon>
-      <ProductImage src={imageUrl} alt={title} />
-      <ProductDetails>
-        <h3>{title}</h3>
-        <PriceTag>₹{price}</PriceTag>
-        <ActionsContainer>
-          <AddToCartButton onClick={(e) => { e.stopPropagation(); onAddToCart(); }}>
-            Add to Cart
-            <HiOutlineShoppingCart />
-          </AddToCartButton>
-        </ActionsContainer>
-      </ProductDetails>
-    </CardContainer>
+    <FavoriteIcon isFavorited={isFavorited} onClick={handleFavoriteClick}>
+      {isFavorited ? <AiFillHeart /> : <AiOutlineHeart />}
+    </FavoriteIcon>
+    <ProductImage src={product.images[0]} alt={product.title} />
+    <ProductDetails>
+      <h3>{product.title}</h3>
+      <PriceTag>₹{price22K}</PriceTag>
+      <ActionsContainer>
+        <AddToCartButton onClick={(e) => e.stopPropagation()}>
+          Add to Cart <HiOutlineShoppingCart />
+        </AddToCartButton>
+      </ActionsContainer>
+    </ProductDetails>
+  </CardContainer>
   );
 };
 

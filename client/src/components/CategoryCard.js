@@ -44,9 +44,9 @@ const CategoryDetails = styled.div`
   }
 `;
 
-const CategoryCard = ({ imageUrl, title }) => {
+const CategoryCard = ({ imageUrl, title, onClick }) => {
   return (
-    <CardContainer>
+    <CardContainer onClick={onClick}>
       <CategoryImage src={imageUrl} alt={title} />
       <CategoryDetails>
         <h3>{title}</h3>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import { FaEnvelope, FaWhatsapp, FaInstagram } from "react-icons/fa";
 
 const FooterContainer = styled.footer`
@@ -12,8 +13,7 @@ const FooterContainer = styled.footer`
   border-top: 1px solid #ddd;
   font-family: 'Arial', sans-serif;
 
-
-   @media (max-width: 768px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
     padding: 2rem 1rem;
@@ -50,7 +50,7 @@ const Column = styled.div`
     text-decoration: underline;
   }
 
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
     text-align: center;
     margin-bottom: 1.5rem;
 
@@ -76,7 +76,7 @@ const ContactItem = styled.div`
     color: #111;
   }
 
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
     justify-content: center;
     gap: 0.5rem;
 
@@ -97,7 +97,7 @@ const FooterBottom = styled.div`
   font-weight: 500;
   letter-spacing: 0.02em;
 
-   @media (max-width: 768px) {
+  @media (max-width: 768px) {
     font-size: 0.75rem;
     padding-top: 1rem;
     margin-top: 0.5rem;
@@ -108,28 +108,27 @@ const Footer = () => {
   return (
     <FooterContainer>
       <Column>
-        <h3>Gold API</h3>
-        <a href="#">About Us</a>
-        <a href="#">Know Us</a>
-        <a href="#">Contact Us</a>
-        <a href="#">FAQs</a>
+        <h3>Discover HARMAiG</h3>
+        <Link to="/know-us">Know Us</Link>
+        <Link to="/contact-us">Contact Us</Link>
+        <Link to="/faqs">FAQs</Link>
       </Column>
 
       <Column>
         <h3>Policies</h3>
-        <a href="#">30-Day Returns</a>
-        <a href="#">Lifetime Exchange</a>
-        <a href="#">Buy Pack</a>
-        <a href="#">Terms & Conditions</a>
+        <Link to="/7-day-returns">7-Day Returns</Link>
+        <Link to="/lifetime-exchange">Lifetime Exchange</Link>
+        <Link to="/doorway-deals">Doorway Deals</Link>
+        <Link to="/terms-and-conditions">Terms & Conditions</Link>
       </Column>
 
       <Column>
         <h3>Services</h3>
-        <a href="#">Repairs</a>
-        <a href="#">Personalisation</a>
-        <a href="#">Art of Gifting</a>
-        <a href="#">Lending</a>
-        <a href="#">Gold SIP and Reward</a>
+        <Link to="/contact-us">Repairs</Link>
+        <Link to="/personalisation">Personalisation</Link>
+        <Link to="/art-of-gifting">Art of Gifting</Link>
+        <Link to="/lending">Lending</Link>
+        <Link to="/gold-sip-and-reward">Gold SIP and Reward</Link>
       </Column>
 
       <Column>

@@ -76,9 +76,7 @@ const ProductList = () => {
         {currentProducts.map((product) => (
           <ProductCard
             key={product.id}
-            imageUrl={product.images[0]}
-            title={product.title}
-            price={product.price}
+         product={product}
             onClick={() => handleProductClick(product.id)}
           />
         ))}

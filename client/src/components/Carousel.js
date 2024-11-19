@@ -13,10 +13,12 @@ const CarouselContainer = styled.div`
   border-radius: 15px;
 
   @media (max-width: 768px) {
+    width: 100vw;
     height: 60vh;
   }
 
   @media (max-width: 480px) {
+    width: 100vw;
     height: 50vh;
   }
 `;

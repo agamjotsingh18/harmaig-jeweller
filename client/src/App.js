@@ -15,6 +15,12 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Orders from "./pages/Orders";
 import Stores from "./pages/Stores";
+import Profile from "./pages/Profile";
+import KnowUs from "./pages/KnowUs";
+import ContactUs from "./pages/ContactUs";
+import DoorwayDeals from "./pages/DoorwayDeals";
+import CategoryList from "./pages/CategoryList";
+import FAQs from "./pages/FAQs";
 
 function App() {
   return (
@@ -26,14 +32,30 @@ function App() {
           <Route path="/" element={<Dashboard />} /> {/* Main page */}
           <Route path="/login" element={<Login />} /> {/* Login page */}
           <Route path="/signup" element={<SignUp />} /> {/* Login page */}
+          <Route path="/profile" element={<Profile />} /> {/* Login page */}
           <Route path="/wishlist" Component={Wishlist} />
           <Route path="/cart" Component={Cart} />
           <Route path="/orders" Component={Orders} />
           <Route path="/stores" Component={Stores} />
+          <Route exact path="/categories" Component={CategoryList} />
           <Route exact path="/products" Component={ProductList} />
           <Route path="/product-detail/:productId" Component={ProductDetail} />
           <Route path="*" element={<h2 style={{ textAlign: "center", margin:"2rem"}}>404 - Page Not Found</h2>} />
+
+          <Route path="/know-us" element={<KnowUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/faqs" element={<FAQs />} />
+          {/* <Route path="/7-day-returns" element={<SevenDayReturns />} />
+          <Route path="/lifetime-exchange" element={<LifetimeExchange />} /> */}
+          <Route path="/doorway-deals" element={<DoorwayDeals />} />
+          {/* <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="/repairs" element={<Repairs />} />
+          <Route path="/personalisation" element={<Personalisation />} />
+          <Route path="/art-of-gifting" element={<ArtOfGifting />} />
+          <Route path="/lending" element={<Lending />} />
+          <Route path="/gold-sip-and-reward" element={<GoldSipAndReward />} /> */}
         </Routes>
+        <br/>
         <Footer/>
       </Router>
     </ThemeProvider>

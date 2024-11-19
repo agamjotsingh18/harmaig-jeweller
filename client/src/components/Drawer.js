@@ -112,6 +112,11 @@ const Drawer = ({ isOpen, toggleDrawer }) => {
     navigate(`/products`);
   };
 
+  const handleMoreClick = () => {
+    toggleDrawer(); // Close drawer
+    navigate(`/categories`);
+  };
+
   // Close drawer when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -145,7 +150,7 @@ const Drawer = ({ isOpen, toggleDrawer }) => {
         <MenuItem>Earrings</MenuItem>
         <MenuItem>Rings</MenuItem>
         <MenuItem>Wedding</MenuItem>
-        <MenuItem>More</MenuItem>
+        <MenuItem onClick={handleMoreClick}>More</MenuItem>
         <HighlightedButton onClick={() => window.open(cataloguePDF, "_blank")}>
           Download Catalogue
         </HighlightedButton>

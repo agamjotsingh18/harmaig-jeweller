@@ -1,11 +1,10 @@
 // Dashboard.js
-import React from 'react';
+import React, { useState } from 'react';
 import Hero from './Hero';
 import CategoryList from '../pages/CategoryList';
 import ProductList from '../pages/ProductList';
 import styled from 'styled-components';
 import Carousel from './Carousel';
-import ProductDetail from './ProductDetail';
 import { useNavigate } from 'react-router-dom';
 
 const Heading = styled.h2`
@@ -42,8 +41,12 @@ const Container = styled.div`
 `;
 
 const Dashboard = () => {
+  const [selectedCategory, setSelectedCategory] = useState(null); // Tracks selected category
   const navigate = useNavigate();
 
+  const handleCategoryClick = (categoryTitle) => {
+    setSelectedCategory(categoryTitle); // Set the selected category
+  };
   const handleProductClick = (productId) => {
     console.log("Product Id", productId);
     navigate(`/product-detail/${productId}`, {state: {productId}});
@@ -51,11 +54,14 @@ const Dashboard = () => {
     return (
       <Container>
         <Carousel />
-        <Heading>By Categories</Heading>
-        <CategoryList />
-        <Heading>Video</Heading>
+        <Heading>Find What You Love by Category</Heading>
+        <CategoryList
+        selectedCategory={selectedCategory}
+        onCategoryClick={handleCategoryClick}
+      />
+        <Heading>Discover the Magic Behind HARMAiG</Heading>
         <Hero />
-        <Heading>By Products</Heading>
+        <Heading>Shop Our Entire Range</Heading>
         <ProductList onProductClick={handleProductClick} />
       </Container>    
   );

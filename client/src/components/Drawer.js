@@ -16,7 +16,7 @@ const DrawerContainer = styled.div`
   transform: ${({ isOpen }) => (isOpen ? "translateX(0)" : "translateX(-100%)")};
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
-  padding: 2rem;
+  padding: 1rem;
 `;
 
 const Overlay = styled.div`
@@ -38,7 +38,7 @@ const LogoContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 60px;
+  width: 51px;
   height: auto;
   filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.2));
   transition: transform 0.3s ease;
@@ -57,7 +57,7 @@ const CloseIcon = styled.div`
 
 const MenuItem = styled.div`
   font-family: ${({ theme }) => theme.fonts.body};
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   padding: 1rem 0;
   cursor: pointer;
   color: #555;
@@ -74,7 +74,7 @@ const HighlightedButton = styled(MenuItem)`
   color: white;
   text-align: center;
   font-weight: bold;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   border-radius: 8px;
   transition: background-color 0.3s;
 
@@ -84,7 +84,7 @@ const HighlightedButton = styled(MenuItem)`
 `;
 
 const ExtraInfoContainer = styled.div`
-  margin-top: 2rem;
+  margin-top: 4.5rem;
   padding-top: 1rem;
   border-top: 1px solid #ddd;
 `;
@@ -92,7 +92,7 @@ const ExtraInfoContainer = styled.div`
 const ExtraInfoItem = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #666;
   padding: 0.5rem 0;
   font-family: ${({ theme }) => theme.fonts.body};
@@ -115,6 +115,15 @@ const Drawer = ({ isOpen, toggleDrawer }) => {
   const handleMoreClick = () => {
     toggleDrawer(); // Close drawer
     navigate(`/categories`);
+  };
+
+  const handleEarringsClick = () => {
+    toggleDrawer(); // Close drawer
+    navigate("/earrings");
+  };
+  const handleRingsClick = () => {
+    toggleDrawer(); // Close drawer
+    navigate("/categories", { state: { category: "Rings" } });
   };
 
   // Close drawer when clicking outside
@@ -147,19 +156,19 @@ const Drawer = ({ isOpen, toggleDrawer }) => {
           <Logo src={logo} alt="Brand Logo" />
         </LogoContainer>
         <MenuItem onClick={handleButtonClick}>All Jewellery</MenuItem>
-        <MenuItem>Earrings</MenuItem>
-        <MenuItem>Rings</MenuItem>
+        <MenuItem onClick={handleEarringsClick}>Earrings</MenuItem>
+        <MenuItem onClick={handleRingsClick}>Rings</MenuItem>
         <MenuItem>Wedding</MenuItem>
         <MenuItem onClick={handleMoreClick}>More</MenuItem>
         <HighlightedButton onClick={() => window.open(cataloguePDF, "_blank")}>
           Download Catalogue
         </HighlightedButton>
         <ExtraInfoContainer>
-          <ExtraInfoItem>✓ Hall Mark Certified</ExtraInfoItem>
-          <ExtraInfoItem>✓ 7 Days Return Policy</ExtraInfoItem>
-          <ExtraInfoItem>✓ Promising Trust and Transparency</ExtraInfoItem>
-          <ExtraInfoItem>✓ 24*7 Support</ExtraInfoItem>
-          <ExtraInfoItem>✓ Luxury at Doorstep</ExtraInfoItem>
+          <ExtraInfoItem>✅ Hall Mark Certified</ExtraInfoItem>
+          <ExtraInfoItem>✅ 7 Days Return Policy</ExtraInfoItem>
+          <ExtraInfoItem>✅ Promising Trust and Transparency</ExtraInfoItem>
+          <ExtraInfoItem>✅ 24*7 Support</ExtraInfoItem>
+          <ExtraInfoItem>✅ Luxury at Doorstep</ExtraInfoItem>
         </ExtraInfoContainer>
       </DrawerContainer>
     </>

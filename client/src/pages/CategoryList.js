@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CategoryCard from "../components/CategoryCard";
 import { products } from "../components/data";
 
@@ -46,15 +46,18 @@ const PaginationButton = styled.button`
   }
 `;
 
-const CategoryList = () => {
+const CategoryList = ({ filteredCategories }) => {
+  const navigate  = useNavigate();
+  const location= useLocation();
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const navigate = useNavigate();
+  // const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(location.state?.category || null);
+
 
   const categories = [
     { imageUrl: "https://i.postimg.cc/y8WXqw0L/IMG-0527-2.webp", title: "Tops" },
-    { imageUrl: "https://i.postimg.cc/qBCPr5xM/1.png", title: "Rings" },
+    { imageUrl: "https://i.postimg.cc/RCcgX5Tf/Precious-Aura-X0-0963png.png", title: "Rings" },
     { imageUrl: "https://i.postimg.cc/W1mYzRdT/IMG-0782.jpg", title: "Pendants" },
     { imageUrl: "https://i.postimg.cc/XNDR60CP/IMG-0764.jpg", title: "Necklace" },
     { imageUrl: "https://i.postimg.cc/vTqMpgd2/IMG-0747.webp", title: "Mens rings" },
@@ -70,15 +73,22 @@ const CategoryList = () => {
     { imageUrl: "https://i.postimg.cc/SQMCrGSj/image-zoom.jpg", title: "Maang tika" },
   ];
 
+  const displayedCategories = filteredCategories
+  ? categories.filter((category) => filteredCategories.includes(category.title))
+  : categories;
+
   const filteredProducts = selectedCategory
     ? products.filter((product) => product.category === selectedCategory)
     : [];
 
+
+    
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentCategories = categories.slice(indexOfFirstItem, indexOfLastItem);
+  const currentCategories = displayedCategories.slice(indexOfFirstItem, indexOfLastItem);
 
-  const totalPages = Math.ceil(categories.length / itemsPerPage);
+  const totalPages = Math.ceil(displayedCategories.length / itemsPerPage);
 
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -96,11 +106,16 @@ const CategoryList = () => {
     navigate(`/product-detail/${productId}`);
   };
 
+  // React.useEffect(() => {
+  //   if (selectedCategory && filteredProducts.length === 0) {
+  //     setSelectedCategory(null);
+  //   }
+  // }, [selectedCategory, filteredProducts]);
   React.useEffect(() => {
-    if (selectedCategory && filteredProducts.length === 0) {
-      setSelectedCategory(null);
+    if (location.state?.category) {
+      setSelectedCategory(location.state.category);
     }
-  }, [selectedCategory, filteredProducts]);
+  }, [location.state]);
 
   return (
     <>

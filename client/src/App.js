@@ -21,6 +21,7 @@ import ContactUs from "./pages/ContactUs";
 import DoorwayDeals from "./pages/DoorwayDeals";
 import CategoryList from "./pages/CategoryList";
 import FAQs from "./pages/FAQs";
+import EarringsCategories from "./pages/EarringsCategories";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/cart" Component={Cart} />
           <Route path="/orders" Component={Orders} />
           <Route path="/stores" Component={Stores} />
+          <Route path="/earrings" element={<EarringsCategories />} /> {/* New Route */}
           <Route exact path="/categories" Component={CategoryList} />
           <Route exact path="/products" Component={ProductList} />
           <Route path="/product-detail/:productId" Component={ProductDetail} />

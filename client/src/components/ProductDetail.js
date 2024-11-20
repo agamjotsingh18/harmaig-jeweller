@@ -148,7 +148,7 @@ const ProductDetail = () => {
   const { productId } = useParams();
   const product = products.find((p) => p.id === Number(productId)); // Find the product by ID
   const [selectedImage, setSelectedImage] = useState(product?.images[0] || "");
-  const [selectedKarat, setSelectedKarat] = useState(product?.selectedKarat || "24K");
+  const [selectedKarat, setSelectedKarat] = useState(product?.selectedKarat || "22K");
 
   if (!product) {
     return <h2>Product not found</h2>;

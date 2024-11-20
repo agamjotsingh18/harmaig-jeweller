@@ -22,6 +22,13 @@ import DoorwayDeals from "./pages/DoorwayDeals";
 import CategoryList from "./pages/CategoryList";
 import FAQs from "./pages/FAQs";
 import EarringsCategories from "./pages/EarringsCategories";
+import SevenDayReturns from "./pages/SevenDayReturns";
+import LifetimeExchange from "./pages/LifetimeExchange";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import Personalisation from "./pages/Personalisation";
+import ArtOfGifting from "./pages/ArtOfGifting";
+import Lending from "./pages/Lending";
+import GoldSipAndReward from "./pages/GoldSipAndReward";
 
 function App() {
   return (
@@ -46,16 +53,16 @@ function App() {
 
           <Route path="/know-us" element={<KnowUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/faqs" element={<FAQs />} />
-          {/* <Route path="/7-day-returns" element={<SevenDayReturns />} />
-          <Route path="/lifetime-exchange" element={<LifetimeExchange />} /> */}
           <Route path="/doorway-deals" element={<DoorwayDeals />} />
-          {/* <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-          <Route path="/repairs" element={<Repairs />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/7-day-returns" element={<SevenDayReturns />} />
+          <Route path="/lifetime-exchange" element={<LifetimeExchange />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          {/* <Route path="/repairs" element={<Repairs />} /> */}
           <Route path="/personalisation" element={<Personalisation />} />
           <Route path="/art-of-gifting" element={<ArtOfGifting />} />
           <Route path="/lending" element={<Lending />} />
-          <Route path="/gold-sip-and-reward" element={<GoldSipAndReward />} /> */}
+          <Route path="/gold-sip-and-reward" element={<GoldSipAndReward />} />
         </Routes>
         <br/>
         <Footer/>

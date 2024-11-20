@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"; 
 import { useWishlist } from "../context/WishlistContext";
 import { HiOutlineShoppingCart } from "react-icons/hi"; // Cart icon
+import { useNavigate } from "react-router-dom";
 
 const CardContainer = styled.div`
   position: relative;
@@ -100,11 +101,17 @@ const FavoriteIcon = styled.div`
 `;
 
 const ProductCard = ({ product, onClick }) => {
+  const navigate= useNavigate();
   const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
   const isFavorited = wishlist.some((item) => item.id === product.id);
 
   const price22K = product.prices.find((price) => price.karat === "22K")?.value;
 
+
+  const handleCallUsClick = (e) => {
+    e.stopPropagation()
+    navigate("/contact-us"); // Navigate to the contact us page
+  };
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
     isFavorited ? removeFromWishlist(product.id) : addToWishlist(product);
@@ -120,7 +127,7 @@ const ProductCard = ({ product, onClick }) => {
       <h3>{product.title}</h3>
       <PriceTag>₹{price22K}</PriceTag>
       <ActionsContainer>
-        <AddToCartButton onClick={(e) => e.stopPropagation()}>
+        <AddToCartButton onClick={handleCallUsClick}>
           Add to Cart <HiOutlineShoppingCart />
         </AddToCartButton>
       </ActionsContainer>

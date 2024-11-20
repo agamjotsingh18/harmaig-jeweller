@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { products } from "./data"; // Import the products data
 
@@ -149,6 +149,7 @@ const ProductDetail = () => {
   const product = products.find((p) => p.id === Number(productId)); // Find the product by ID
   const [selectedImage, setSelectedImage] = useState(product?.images[0] || "");
   const [selectedKarat, setSelectedKarat] = useState(product?.selectedKarat || "22K");
+  const navigate = useNavigate(); // useNavigate hook for navigation
 
   if (!product) {
     return <h2>Product not found</h2>;
@@ -157,6 +158,13 @@ const ProductDetail = () => {
   const selectedWeight = product.weights.find((w) => w.karat === selectedKarat)?.value;
   const selectedPrice = product.prices.find((p) => p.karat === selectedKarat)?.value;
 
+  const handleCallUsClick = () => {
+    navigate("/contact-us"); // Navigate to the contact us page
+  };
+
+  const handleDoorwayDealsClick = () => {
+    navigate("/doorway-deals"); // Navigate to the doorway deals page
+  };
 
   return (
     <Container>
@@ -173,7 +181,7 @@ const ProductDetail = () => {
           ))}
         </ImageGallery>
       )}
-   <ProductInfo>
+      <ProductInfo>
         <Title>{product.title}</Title>
         <Details>SKU: {product.sku}</Details>
         <Price>Price: {selectedPrice ? `₹${selectedPrice}` : "N/A"}</Price>
@@ -191,9 +199,9 @@ const ProductDetail = () => {
         </KaratOptions>
       </ProductInfo>
       <ButtonContainer>
-        <ActionButton>Add to Cart</ActionButton>
-        <ActionButton>Call Us</ActionButton>
-        <DoorwayDealButton>Doorway Deal</DoorwayDealButton>
+        <ActionButton onClick={handleCallUsClick}>Add to Cart</ActionButton>
+        <ActionButton onClick={handleCallUsClick}>Call Us</ActionButton>
+        <DoorwayDealButton onClick={handleDoorwayDealsClick}>Doorway Deal</DoorwayDealButton>
       </ButtonContainer>
     </Container>
   );

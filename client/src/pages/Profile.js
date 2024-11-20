@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 // Styled Components
@@ -95,6 +96,15 @@ const ContactRow = styled.div`
 const Profile = ({ firstName = "Harmaig", lastName = "Jeweller" }) => {
     const [image, setImage] = useState(null);
   const [name, setName] = useState(`${firstName} ${lastName}`);
+  const navigate= useNavigate();
+
+
+  const handleContactButton = () => {
+    navigate("/contact-us"); // Navigate to the contact us page
+  };
+  const handleFaqButton = () => {
+    navigate("/faqs"); // Navigate to the contact us page
+  };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -128,27 +138,27 @@ const Profile = ({ firstName = "Harmaig", lastName = "Jeweller" }) => {
 
       {/* Name and SubText */}
         <label htmlFor="upload" style={{ cursor: "pointer", color: "#000" }}>
-          Edit
+          edit
         </label>
       <NameText>{name}</NameText>
       <SubText>Active membership since 2021</SubText>
 
       {/* Buttons */}
       <ButtonGroup>
-        <ActionButton primary>Contact Support</ActionButton>
-        <ActionButton primary>FAQ</ActionButton>
+        <ActionButton primary onClick={handleContactButton}>Contact Support</ActionButton>
+        <ActionButton primary onClick={handleFaqButton}>FAQ</ActionButton>
       </ButtonGroup>
-      <ActionButton primary>Report an Issue</ActionButton>
+      {/* <ActionButton primary>Report an Issue</ActionButton> */}
 
       {/* Contact Details */}
       <ContactDetails>
         <ContactRow>
           <span>Email</span>
-          <strong>support@xyz.com</strong>
+          <strong>hello@harmaig.com</strong>
         </ContactRow>
         <ContactRow>
           <span>Phone (Our Country)</span>
-          <strong>+91-987-456-7890</strong>
+          <strong>+91 7021920836</strong>
         </ContactRow>
         <ContactRow>
           <span>Address</span>
